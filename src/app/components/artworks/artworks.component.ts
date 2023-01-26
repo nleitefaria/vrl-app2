@@ -8,6 +8,7 @@ import { ArtworksService } from '../../services/artworks.service';
 })
 export class ArtworksComponent implements OnInit {
   artworks:any;
+  artwork:any;
   p: number = 1;
   total: number = 0;
 
@@ -22,7 +23,14 @@ export class ArtworksComponent implements OnInit {
         .subscribe((response: any) => {
           this.artworks = response.data;
           this.total = response.pagination.total;
-        });
+    });
+  }
+
+  getArtworkById(id: number) {
+    this.service.getArtworkById(id)
+            .subscribe((response: any) => {
+              this.artwork = response.data;
+    });
   }
 
   pageChangeEvent(event: number){

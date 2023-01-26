@@ -11,6 +11,10 @@ export class ArtworksService {
   constructor(private httpClient: HttpClient) { }
 
   getArtworks(page: number){
-      return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
+    return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
+  }
+
+  getArtworkById(id: number){
+    return this.httpClient.get(this.url + '/' + id);
   }
 }
