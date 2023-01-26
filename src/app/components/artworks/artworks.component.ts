@@ -13,12 +13,8 @@ export class ArtworksComponent implements OnInit {
 
   constructor(private service:ArtworksService) {}
 
-
   ngOnInit() {
     this.getArtworks();
-
-    alert(this.artworks);
-    alert(this.total);
   }
 
   getArtworks() {
