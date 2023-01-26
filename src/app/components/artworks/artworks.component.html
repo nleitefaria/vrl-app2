@@ -1,20 +1,26 @@
 <div class="container">
-    <table class="table">
+    <nav aria-label="breadcrumb" style="padding-top:40px; padding-bottom:20px">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><h2>Artworks</h2></li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <table class="table" style="border-collapse: collapse;">
         <thead>
         <tr>
             <th>Title</th>
             <th>Artist</th>
             <th>Type</th>
-            <th>Department</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let artwork of artworks| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }">
             <td>{{ artwork.title }}</td>
-            <td>{{ artwork.artist_title }}</td>
+            <td>{{artwork.artist_title ?? "n.a."}}</td>
             <td>{{ artwork.artwork_type_title}}</td>
-            <td>{{ artwork.department_title}}</td>
             <td>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button><button type="button" class="btn btn-link">View</button>
             </td>
