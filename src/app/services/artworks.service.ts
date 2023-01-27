@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ArtworksService {
 
   private url = 'https://api.artic.edu/api/v1/artworks';
+  private imgUrl = 'https://www.artic.edu/iiif/2/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,5 +17,9 @@ export class ArtworksService {
 
   getArtworkById(id: number){
     return this.httpClient.get(this.url + '/' + id);
+  }
+
+  getImageIdById(id: number){
+    return this.httpClient.get(this.url + '/' + id + "?fields=image_id");
   }
 }

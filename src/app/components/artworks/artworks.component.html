@@ -22,24 +22,84 @@
             <td>{{artwork.artist_title ?? "n.a."}}</td>
             <td>{{ artwork.artwork_type_title}}</td>
             <td>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getArtworkById(artwork.id)">Details</button><button type="button" class="btn btn-link">View</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getArtworkById(artwork.id)">View</button><button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="getArtworkById(artwork.id)">Details</button>
             </td>
         </tr>
         </tbody>
     </table>
     <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- View Modal -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                <div *ngIf="artwork">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="viewModalLabel"><b>{{ artwork.title }}</b><br>by<br><b>{{artwork.artist_title ?? "n.a."}}</b></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="display: flex;justify-content: center;align-items: center;">
+                            <div><img src='{{ imageURL }}'></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div *ngIf="artwork">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h6 class="modal-title" id="detailsModalLabel"><b>{{ artwork.title }}</b><br>by<br><b>{{artwork.artist_title ?? "n.a."}}</b></h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div *ngIf="artwork">
-                        <p>{{ artwork.title }}</p>
+                        <table class="table">
+                            <tr>
+                                <th scope="row">Title</th>
+                                <td>{{ artwork.title }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reference number</th>
+                                <td>{{ artwork.main_reference_number }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date start</th>
+                                <td>{{ artwork.date_start }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Date end</th>
+                                <td>{{ artwork.date_end }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Artist display</th>
+                                <td>{{ artwork.artist_display }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Place of origin</th>
+                                <td>{{ artwork.place_of_origin }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dimensions</th>
+                                <td>{{ artwork.dimensions }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Medium display</th>
+                                <td>{{ artwork.medium_display }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Credit line</th>
+                                <td>{{ artwork.credit_line }}</td>
+                            </tr>
+
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
