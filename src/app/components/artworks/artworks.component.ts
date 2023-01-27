@@ -29,6 +29,7 @@ export class ArtworksComponent implements OnInit {
   }
 
   getArtworkById(id: number) {
+    this.artwork = null;
     this.service.getArtworkById(id)
             .subscribe((response: any) => {
               this.artwork = response.data;
