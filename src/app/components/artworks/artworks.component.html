@@ -18,8 +18,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let artwork of artworks| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }">
-            <td>{{ artwork.title }}</td>
-            <td>{{artwork.artist_title ?? "n.a."}}</td>
+            <td *ngIf="artwork.title.length>50">{{ artwork.title | slice:0:50}} ...</td>
+            <td *ngIf="artwork.title.length<50">{{ artwork.title}}</td>
+            <td>{{ artwork.artist_title ?? "n.a." }}</td>
             <td>{{ artwork.artwork_type_title}}</td>
             <td>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getArtworkById(artwork.id)">View</button><button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="getArtworkById(artwork.id)">Details</button>
