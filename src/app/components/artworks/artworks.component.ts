@@ -9,6 +9,8 @@ import { ArtworksService } from '../../services/artworks.service';
 export class ArtworksComponent implements OnInit {
   artworks:any;
   artwork:any;
+  imageId!:any;
+  imageURL!:any;
   p: number = 1;
   total: number = 0;
 
@@ -30,6 +32,16 @@ export class ArtworksComponent implements OnInit {
     this.service.getArtworkById(id)
             .subscribe((response: any) => {
               this.artwork = response.data;
+    });
+
+    this.getImageIdById(id);
+  }
+
+  getImageIdById(id: number) {
+    this.service.getImageIdById(id)
+             .subscribe((response: any) => {
+             this.imageId = response.data.image_id;
+             this.imageURL = "https://www.artic.edu/iiif/2/" + this.imageId + "/full/600,/0/default.jpg";
     });
   }
 
