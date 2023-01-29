@@ -11,6 +11,7 @@ export class ArtworksComponent implements OnInit {
   artwork:any;
   imageId!:any;
   imageURL!:any;
+  loading!:boolean;
   p: number = 1;
   total: number = 0;
 
@@ -25,6 +26,7 @@ export class ArtworksComponent implements OnInit {
         .subscribe((response: any) => {
           this.artworks = response.data;
           this.total = response.pagination.total;
+          this.loading = false;
     });
   }
 
@@ -47,6 +49,7 @@ export class ArtworksComponent implements OnInit {
   }
 
   pageChangeEvent(event: number){
+    this.loading = true;
     this.p = event;
     this.getArtworks();
   }
