@@ -4,17 +4,17 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class SitesService {
 
-  private url = 'https://api.artic.edu/api/v1/products';
+  private url = 'https://api.artic.edu/api/v1/sites';
 
   constructor(private httpClient: HttpClient) { }
 
-    getProducts(page: number){
+  getSites(page: number){
       return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
-    }
+  }
 
-    getProductById(id: number){
-      return this.httpClient.get(this.url + '/' + id);
-    }
+  getSiteById(id: number){
+    return this.httpClient.get(this.url + '/' + id);
+  }
 }
