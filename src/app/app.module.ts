@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ArtworksComponent } from './components/artworks/artworks.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ToursComponent } from './components/tours/tours.component';
+import { SitesComponent } from './components/sites/sites.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArtworksComponent,
     HomeComponent,
-    ProductsComponent
+    ProductsComponent,
+    ToursComponent,
+    SitesComponent
   ],
   imports: [
     BrowserModule,

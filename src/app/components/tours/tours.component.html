@@ -1,0 +1,65 @@
+<div class="container">
+<nav aria-label="breadcrumb" style="padding-top:40px; padding-bottom:20px">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><h2>Tours</h2></li>
+    </ol>
+</nav>
+</div>
+
+<div class="container">
+    <table class="table" style="border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let tour of tours| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }">
+            <td> {{ tour.title }}</td>
+            <td style="text-align: right">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getTourById(tour.id)">View tour details</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div *ngIf="loading">
+        Loading data, please wait ...
+    </div>
+    <div *ngIf="!loading">
+        <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+    </div>
+
+    <!-- View Modal -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div *ngIf="tour">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="viewModalLabel"><b>{{ tour.title }}</b></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div [innerHTML]="tour.description"></div>
+                            <div [innerHTML]="tour.intro"></div>
+                            <div [innerHTML]="tour.intro_transcript"></div>
+                            <br>Artwork titles:<br><br>
+                            <ul>
+                            <div *ngFor="let artwork_title of tour.artwork_titles">
+                                <li>{{artwork_title}}</li>
+                            </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
