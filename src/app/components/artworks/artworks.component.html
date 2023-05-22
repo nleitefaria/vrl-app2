@@ -18,9 +18,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let artwork of artworks| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }">
-            <td *ngIf="artwork.title.length>50"><span title="{{ artwork.title }}">{{ artwork.title | slice:0:50 ?? "n.a." }} ...</span></td>
+            <td *ngIf="artwork.title.length>50 || artwork.title.length==50"><span title="{{ artwork.title }}">{{ artwork.title | slice:0:50 ?? "n.a." }} ...</span></td>
             <td *ngIf="artwork.title.length<50"><span title="{{ artwork.title}}">{{ artwork.title ?? "n.a."}}</span></td>
-            <td *ngIf="!artwork.title">"n.a."</td>
             <td>{{ artwork.artist_title ?? "n.a." }}</td>
             <td>{{ artwork.artwork_type_title ?? "n.a." }}</td>
             <td>
