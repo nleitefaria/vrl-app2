@@ -21,7 +21,7 @@
             <td *ngIf="artwork.title.length>50"><span title="{{ artwork.title}}">{{ artwork.title | slice:0:50}} ...</span></td>
             <td *ngIf="artwork.title.length<50"><span title="{{ artwork.title}}">{{ artwork.title}}</span></td>
             <td>{{ artwork.artist_title ?? "n.a." }}</td>
-            <td>{{ artwork.artwork_type_title}}</td>
+            <td>{{ artwork.artwork_type_title ?? "n.a." }}</td>
             <td>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getArtworkById(artwork.id)">View</button><button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#detailsModal" (click)="getArtworkById(artwork.id)">Details</button>
             </td>
