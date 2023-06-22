@@ -18,7 +18,7 @@
         <tr *ngFor="let site of sites| paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }">
             <td> {{ site.title }}</td>
             <td style="text-align: right">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getSiteById(site.id)">View tour details</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getSiteById(site.id)">View static content</button>
             </td>
         </tr>
         </tbody>
