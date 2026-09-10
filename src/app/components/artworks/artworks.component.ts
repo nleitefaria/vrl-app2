@@ -46,10 +46,8 @@ export class ArtworksComponent implements OnInit {
       .subscribe((response: any) => {
 
         this.imageId = response.data.image_id;
-
-        this.imageURL =
-          `https://www.artic.edu/iiif/2/${encodeURIComponent(this.imageId)}/full/843,/0/default.jpg`;
         this.imageFallbackURL = response.data.thumbnail?.lqip;
+        this.imageURL = this.imageFallbackURL;
 
       });
   }
