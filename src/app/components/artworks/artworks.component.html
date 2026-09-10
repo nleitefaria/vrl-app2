@@ -46,7 +46,9 @@
                     </div>
                     <div class="modal-body">
                         <div style="display: flex;justify-content: center;align-items: center;">
-                            <div><img src='{{ imageURL }}' (error)="useImageFallback()" alt="{{ artwork.title }}"></div>
+                            <div class="artwork-image-container">
+                                <img class="artwork-image" src='{{ imageURL }}' (error)="useImageFallback()" alt="{{ artwork.title }}">
+                            </div>
                     </div>
                 </div>
                 <div class="modal-footer">
