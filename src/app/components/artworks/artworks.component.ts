@@ -47,7 +47,7 @@ export class ArtworksComponent implements OnInit {
         this.imageId = response.data.image_id;
 
         this.imageURL =
-          `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
+          `https://www.artic.edu/iiif/2/${encodeURIComponent(this.imageId)}/full/843,/0/default.jpg`;
 
       });
   }
