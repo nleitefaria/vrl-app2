@@ -1,16 +1,16 @@
-export async function GET(request: Request): Promise<Response> {
-  const url = new URL(request.url);
-  const imageId = url.searchParams.get('imageId');
+import fetch from 'node-fetch';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-  if (!imageId || !/^[a-zA-Z0-9-]+$/.test(imageId)) {
-    return Response.json(
-      {
-        error: 'Invalid or missing imageId parameter'
-      },
-      {
-        status: 400
-      }
-    );
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  const imageId = req.query.imageId;
+
+  if (typeof imageId !== 'string' || !/^[a-zA-Z0-9-]+$/.test(imageId)) {
+    return res.status(400).json({
+      error: 'Invalid or missing imageId parameter'
+    });
   }
 
   const imageUrl = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
@@ -24,34 +24,22 @@ export async function GET(request: Request): Promise<Response> {
     });
 
     if (!response.ok) {
-      return Response.json(
-        {
-          error: 'Unable to retrieve image',
-          upstreamStatus: response.status
-        },
-        {
-          status: response.status
-        }
-      );
+      return res.status(response.status).json({
+        error: 'Unable to retrieve image',
+        upstreamStatus: response.status
+      });
     }
 
-    return new Response(response.body, {
-      status: 200,
-      headers: {
-        'Content-Type': response.headers.get('content-type') ?? 'image/jpeg',
-        'Cache-Control': 'public, max-age=86400, s-maxage=86400'
-      }
-    });
+    const body = Buffer.from(await response.arrayBuffer());
+    res.setHeader('Content-Type', response.headers.get('content-type') ?? 'image/jpeg');
+    res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+
+    return res.status(200).send(body);
   } catch (error) {
     console.error('Error fetching Art Institute image:', error);
 
-    return Response.json(
-      {
-        error: 'Internal server error'
-      },
-      {
-        status: 500
-      }
-    );
+    return res.status(500).json({
+      error: 'Internal server error'
+    });
   }
 }
