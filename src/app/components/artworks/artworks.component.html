@@ -48,6 +48,11 @@
                         <div style="display: flex;justify-content: center;align-items: center;">
                             <div class="artwork-image-container">
                                 <img class="artwork-image" src='{{ imageURL }}' (error)="useImageFallback()" alt="{{ artwork.title }}">
+                                <p class="artwork-image-help">
+                                    <a [href]="artworkPageURL" target="_blank" rel="noopener noreferrer">
+                                        Open the full image on the Art Institute website
+                                    </a>
+                                </p>
                             </div>
                     </div>
                 </div>

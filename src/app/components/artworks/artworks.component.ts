@@ -12,6 +12,7 @@ export class ArtworksComponent implements OnInit {
   imageId!:any;
   imageURL!:any;
   imageFallbackURL!:any;
+  artworkPageURL!: string;
   loading!:boolean;
   p: number = 1;
   total: number = 0;
@@ -49,6 +50,7 @@ export class ArtworksComponent implements OnInit {
         this.imageFallbackURL = response.data.thumbnail?.lqip;
         this.imageURL =
           `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
+        this.artworkPageURL = `https://www.artic.edu/artworks/${id}`;
 
       });
   }
