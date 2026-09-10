@@ -11,16 +11,22 @@ export default async function handler(
     return res.status(400).json({ error: 'Invalid or missing imageId parameter' });
   }
 
-  const pathname = `artworks/${imageId}.jpg`;
-  const cached = await list({ prefix: pathname, limit: 1 });
-
-  if (cached.blobs[0]?.url) {
-    return res.redirect(307, cached.blobs[0].url);
-  }
-
-  const imageUrl = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
-
   try {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return res.status(503).json({
+        error: 'Image cache is not configured'
+      });
+    }
+
+    const pathname = `artworks/${imageId}.jpg`;
+    const cached = await list({ prefix: pathname, limit: 1 });
+
+    if (cached.blobs[0]?.url) {
+      return res.redirect(307, cached.blobs[0].url);
+    }
+
+    const imageUrl =
+      `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
     const response = await fetch(imageUrl, {
       headers: {
         Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
@@ -31,9 +37,9 @@ export default async function handler(
 
     if (!response.ok) {
       return res.status(response.status).json({
-          error: 'Unable to retrieve image',
-          upstreamStatus: response.status
-        });
+        error: 'Unable to retrieve image',
+        upstreamStatus: response.status
+      });
     }
 
     const blob = await put(pathname, response.body, {
