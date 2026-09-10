@@ -1,0 +1,14 @@
+.artwork-image-container {
+    width: 100%;
+    text-align: center;
+}
+
+.artwork-image {
+    display: block;
+    width: 100%;
+    max-width: 843px;
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+}
