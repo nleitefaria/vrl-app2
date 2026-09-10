@@ -47,7 +47,8 @@ export class ArtworksComponent implements OnInit {
 
         this.imageId = response.data.image_id;
         this.imageFallbackURL = response.data.thumbnail?.lqip;
-        this.imageURL = this.imageFallbackURL;
+        this.imageURL =
+          `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
 
       });
   }
