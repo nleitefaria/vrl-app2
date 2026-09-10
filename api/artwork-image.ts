@@ -30,8 +30,14 @@ export default async function handler(
     const response = await fetch(imageUrl, {
       headers: {
         Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        Origin: 'https://www.artic.edu',
         Referer: 'https://www.artic.edu/',
-        'User-Agent': 'Mozilla/5.0'
+        'Sec-Fetch-Dest': 'image',
+        'Sec-Fetch-Mode': 'no-cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'
       }
     });
 
