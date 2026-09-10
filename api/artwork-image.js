@@ -7,6 +7,7 @@ function proxyImage(imageUrl, res) {
       {
         headers: {
           Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+          Referer: 'https://www.artic.edu/',
           'User-Agent': 'Mozilla/5.0'
         }
       },
