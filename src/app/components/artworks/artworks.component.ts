@@ -42,10 +42,14 @@ export class ArtworksComponent implements OnInit {
 
   getImageIdById(id: number) {
     this.service.getImageIdById(id)
-             .subscribe((response: any) => {
-             this.imageId = response.data.image_id;
-             this.imageURL = "https://www.artic.edu/iiif/2/" + this.imageId + "/full/600,/0/default.jpg";
-    });
+      .subscribe((response: any) => {
+
+        this.imageId = response.data.image_id;
+
+        this.imageURL =
+          `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
+
+      });
   }
 
   pageChangeEvent(event: number){
