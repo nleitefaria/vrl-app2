@@ -11,6 +11,7 @@ export class ArtworksComponent implements OnInit {
   artwork:any;
   imageId!:any;
   imageURL!:any;
+  imageFallbackURL!:any;
   loading!:boolean;
   p: number = 1;
   total: number = 0;
@@ -48,8 +49,15 @@ export class ArtworksComponent implements OnInit {
 
         this.imageURL =
           `https://www.artic.edu/iiif/2/${encodeURIComponent(this.imageId)}/full/843,/0/default.jpg`;
+        this.imageFallbackURL = response.data.thumbnail?.lqip;
 
       });
+  }
+
+  useImageFallback() {
+    if (this.imageFallbackURL && this.imageURL !== this.imageFallbackURL) {
+      this.imageURL = this.imageFallbackURL;
+    }
   }
 
   pageChangeEvent(event: number){

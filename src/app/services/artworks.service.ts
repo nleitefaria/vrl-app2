@@ -20,6 +20,6 @@ export class ArtworksService {
   }
 
   getImageIdById(id: number){
-    return this.httpClient.get(this.url + '/' + id + "?fields=image_id");
+    return this.httpClient.get(this.url + '/' + id + "?fields=image_id,thumbnail");
   }
 }
