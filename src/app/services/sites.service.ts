@@ -6,19 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SitesService {
 
-  private url = '/api/artic';
+  private url = '/api/artic/sites';
 
   constructor(private httpClient: HttpClient) { }
 
   getSites(page: number){
       return this.httpClient.get(this.url, {
-        params: { resource: 'sites', page, limit: 10 }
+        params: { page, limit: 10 }
       });
   }
 
   getSiteById(id: number){
-    return this.httpClient.get(this.url, {
-      params: { resource: 'sites', id }
-    });
+    return this.httpClient.get(`${this.url}/${id}`);
   }
 }
