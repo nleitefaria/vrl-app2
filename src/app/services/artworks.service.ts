@@ -6,20 +6,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ArtworksService {
 
-  private url = 'https://api.artic.edu/api/v1/artworks';
-  private imgUrl = 'https://www.artic.edu/iiif/2/';
+  private url = '/api/artic';
 
   constructor(private httpClient: HttpClient) { }
 
   getArtworks(page: number){
-    return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
+    return this.httpClient.get(this.url, {
+      params: { resource: 'artworks', page, limit: 10 }
+    });
   }
 
   getArtworkById(id: number){
-    return this.httpClient.get(this.url + '/' + id);
+    return this.httpClient.get(this.url, {
+      params: { resource: 'artworks', id }
+    });
   }
 
   getImageIdById(id: number){
-    return this.httpClient.get(this.url + '/' + id + "?fields=image_id,thumbnail");
+    return this.httpClient.get(this.url, {
+      params: { resource: 'artworks', id, fields: 'image_id,thumbnail' }
+    });
   }
 }

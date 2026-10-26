@@ -6,15 +6,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ToursService {
 
-  private url = 'https://api.artic.edu/api/v1/tours';
+  private url = '/api/artic';
 
   constructor(private httpClient: HttpClient) { }
 
   getTours(page: number){
-    return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
+    return this.httpClient.get(this.url, {
+      params: { resource: 'tours', page, limit: 10 }
+    });
   }
 
   getTourById(id: number){
-    return this.httpClient.get(this.url + '/' + id);
+    return this.httpClient.get(this.url, {
+      params: { resource: 'tours', id }
+    });
   }
 }

@@ -6,15 +6,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsService {
 
-  private url = 'https://api.artic.edu/api/v1/products';
+  private url = '/api/artic';
 
   constructor(private httpClient: HttpClient) { }
 
     getProducts(page: number){
-      return this.httpClient.get(this.url + '?page=' + page + '&limit=10');
+      return this.httpClient.get(this.url, {
+        params: { resource: 'products', page, limit: 10 }
+      });
     }
 
     getProductById(id: number){
-      return this.httpClient.get(this.url + '/' + id);
+      return this.httpClient.get(this.url, {
+        params: { resource: 'products', id }
+      });
     }
 }
