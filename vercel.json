@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/artic/:path*",
+      "destination": "https://api.artic.edu/api/v1/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

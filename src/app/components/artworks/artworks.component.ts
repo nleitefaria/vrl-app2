@@ -11,6 +11,8 @@ export class ArtworksComponent implements OnInit {
   artwork:any;
   imageId!:any;
   imageURL!:any;
+  imageFallbackURL!:any;
+  artworkPageURL!: string;
   loading!:boolean;
   p: number = 1;
   total: number = 0;
@@ -42,10 +44,21 @@ export class ArtworksComponent implements OnInit {
 
   getImageIdById(id: number) {
     this.service.getImageIdById(id)
-             .subscribe((response: any) => {
-             this.imageId = response.data.image_id;
-             this.imageURL = "https://www.artic.edu/iiif/2/" + this.imageId + "/full/600,/0/default.jpg";
-    });
+      .subscribe((response: any) => {
+
+        this.imageId = response.data.image_id;
+        this.imageFallbackURL = response.data.thumbnail?.lqip;
+        this.imageURL =
+          `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
+        this.artworkPageURL = `https://www.artic.edu/artworks/${id}`;
+
+      });
+  }
+
+  useImageFallback() {
+    if (this.imageFallbackURL && this.imageURL !== this.imageFallbackURL) {
+      this.imageURL = this.imageFallbackURL;
+    }
   }
 
   pageChangeEvent(event: number){
