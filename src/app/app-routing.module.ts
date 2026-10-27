@@ -7,7 +7,7 @@ import { ToursComponent } from './components/tours/tours.component';
 import { SitesComponent } from './components/sites/sites.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', redirectTo: 'artworks-component', pathMatch: 'full' },
     { path: 'home-component', component: HomeComponent },
     { path: 'artworks-component', component: ArtworksComponent },
     { path: 'products-component', component: ProductsComponent },
