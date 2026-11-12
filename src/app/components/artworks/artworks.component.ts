@@ -49,7 +49,7 @@ export class ArtworksComponent implements OnInit {
         this.imageId = response.data.image_id;
         this.imageFallbackURL = response.data.thumbnail?.lqip;
         this.imageURL =
-          `/api/artwork-image?imageId=${encodeURIComponent(this.imageId)}`;
+          `/api/artwork-image/${encodeURIComponent(this.imageId)}`;
         this.artworkPageURL = `https://www.artic.edu/artworks/${id}`;
 
       });
