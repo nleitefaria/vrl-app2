@@ -8,5 +8,21 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "routes": [
+    {
+      "src": "^/api/artwork-image/([a-zA-Z0-9-]+)$",
+      "dest": "https://www.artic.edu/iiif/2/$1/full/843,/0/default.jpg",
+      "transforms": [
+        {
+          "type": "request.headers",
+          "op": "set",
+          "target": {
+            "key": "referer"
+          },
+          "args": "https://www.artic.edu/artworks/208501/bowditch-alphabet"
+        }
+      ]
+    }
   ]
 }
